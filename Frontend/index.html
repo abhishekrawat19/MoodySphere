@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sentiment Analysis</title>
-    <link rel="stylesheet" href="css/style.css">  <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css">  <!-- Link to external CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> <!-- Google Font -->
 </head>
 <body>
     <div class="container">
-        <h1>Sentiment Analysis</h1>
+        <header>
+            <h1>Sentiment Analysis</h1>
+            <p class="subheading">Analyze the sentiment of any text you input</p>
+        </header>
 
         <!-- Sentiment Analysis Form -->
-        <textarea id="text-input" placeholder="Enter text to analyze"></textarea>
-        <button id="submit-button">Analyze</button>
+        <div class="form-container">
+            <textarea id="text-input" placeholder="Enter text to analyze"></textarea>
+            <button id="submit-button">Analyze</button>
+        </div>
 
         <!-- Error Message -->
         <p id="error-message" class="error"></p>
@@ -21,6 +28,6 @@
         <div id="results" class="results"></div>
     </div>
 
-    <script src="js/script.js"></script>  <!-- Link to external JS -->
+    <script src="script.js"></script>  <!-- Link to external JS -->
 </body>
 </html>
