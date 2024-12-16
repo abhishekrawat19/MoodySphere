@@ -7,39 +7,70 @@
 }
 
 body {
-    background-color: #f8f9fa;
+    background-color: #f7f9fc;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     padding: 20px;
+    margin: 0;
+    font-size: 1rem;
 }
 
+/* Container Style */
 .container {
-    max-width: 600px;
     width: 100%;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    max-width: 500px;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    animation: floatEffect 5s ease-in-out infinite; /* Floating effect */
+}
+
+.container:hover {
+    transform: translateY(-5px); /* Hover effect */
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3); /* Enhanced shadow on hover */
+}
+
+@keyframes floatEffect {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Floating effect */
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 header {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #333;
     margin-bottom: 10px;
+    letter-spacing: 1px;
+    transition: color 0.3s ease; /* Smooth color change */
+}
+
+h1:hover {
+    color: #007bff; /* Color change on hover */
 }
 
 .subheading {
     font-size: 1.1rem;
-    color: #666;
+    color: #555;
+    margin-bottom: 20px;
+    font-weight: 400;
 }
 
+/* Form Container */
 .form-container {
     margin-bottom: 20px;
 }
@@ -48,15 +79,18 @@ textarea {
     width: 100%;
     padding: 15px;
     font-size: 1rem;
+    color: #333;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
     resize: vertical;
     min-height: 150px;
     outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 textarea:focus {
-    border-color: #007bff;
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Subtle shadow on focus */
 }
 
 button {
@@ -65,37 +99,100 @@ button {
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 1.1rem;
+    border-radius: 6px;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden; /* For smooth transitions inside the button */
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: scale(1.05); /* Slightly enlarge the button */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); /* Button shadow on hover */
 }
 
 button:disabled {
     background-color: #aaa;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
+/* Error Message */
 .error {
     color: red;
     font-size: 1.1rem;
-    margin-top: 10px;
+    margin-top: 15px;
+    font-weight: bold;
 }
 
+/* Results Styling */
 .results {
-    margin-top: 20px;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f0f8ff;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .results h3 {
     font-size: 1.5rem;
     color: #333;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.results h3:hover {
+    color: #007bff; /* Results title color change */
 }
 
 .results p {
     font-size: 1rem;
     color: #555;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .subheading {
+        font-size: 1rem;
+    }
+
+    textarea {
+        font-size: 0.95rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+
+    .results h3 {
+        font-size: 1.2rem;
+    }
+
+    .results p {
+        font-size: 0.95rem;
+    }
 }
