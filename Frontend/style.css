@@ -116,17 +116,88 @@ button:hover {
 
 button:disabled {
     background-color: #aaa;
+    color: #fff;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
 }
 
-/* Error Message */
+/* Enhanced Error Message Styling (removed red tones) */
 .error {
-    color: red;
-    font-size: 1.1rem;
-    margin-top: 15px;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 25px;
+    background-color: #ffebcc; /* Soft yellow instead of red */
+    color: #333; /* Dark text color */
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease-out; /* Animation for sliding in */
+    opacity: 0;
+    animation: fadeIn 0.5s forwards, slideIn 0.5s forwards; /* Fade and slide-in effect */
+}
+
+/* Fade and Slide In Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Error Icon */
+.error-icon {
+    margin-right: 15px;
+    font-size: 1.6rem;
+    display: inline-block;
+}
+
+/* Hover effect */
+.error:hover {
+    background-color: #f4e1a1; /* Slightly darker yellow when hovered */
+    cursor: pointer;
+    transform: scale(1.05); /* Slightly scale the error message on hover */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* More prominent shadow on hover */
+}
+
+/* Actionable message in the error */
+.error p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+}
+
+/* Optional "Retry" button styling in the error */
+.error .retry-btn {
+    margin-left: 20px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.error .retry-btn:hover {
+    background-color: #e67e22;
 }
 
 /* Results Styling */
@@ -138,15 +209,6 @@ button:disabled {
     box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
     opacity: 0;
     animation: fadeIn 0.5s forwards;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
 }
 
 .results h3 {
