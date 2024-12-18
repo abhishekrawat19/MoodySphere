@@ -5,29 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sentiment Analysis</title>
-    <link rel="stylesheet" href="style.css">  <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> <!-- Google Font -->
 </head>
 <body>
     <div class="container">
+        <!-- Header Section -->
         <header>
             <h1>Sentiment Analysis</h1>
-            <p class="subheading">Analyze the sentiment of any text you input</p>
+            <p class="subheading">Analyze the sentiment of text or datasets</p>
         </header>
 
-        <!-- Sentiment Analysis Form -->
-        <div class="form-container">
-            <textarea id="text-input" placeholder="Enter text to analyze"></textarea>
-            <button id="submit-button">Analyze</button>
+        <div class="main-layout">
+            <!-- Left Column: Text Analysis -->
+            <div class="column">
+                <h2>Text Analysis</h2>
+                <div class="form-container">
+                    <textarea id="text-input" placeholder="Enter text to analyze"></textarea>
+                    <button id="submit-button">Analyze</button>
+                </div>
+                <p id="error-message" class="error"></p>
+                <div id="results" class="results"></div>
+            </div>
+
+            <!-- Middle Column: Upload Dataset -->
+            <div class="column">
+                <h2>Upload Dataset</h2>
+                <form id="upload-form">
+                    <input type="file" id="dataset-input" accept=".csv, .xlsx">
+                    <button type="submit">Analyze Dataset</button>
+                </form>
+                <div id="dataset-results" class="results"></div>
+            </div>
+
+            <!-- Right Column: Settings -->
+            <div class="column">
+                <h2>Interface Settings</h2>
+                <div class="theme-toggle">
+                    <h3>Theme Selector</h3>
+                    <div>
+                        <button id="light-theme" class="theme-button">Light Theme</button>
+                        <button id="dark-theme" class="theme-button">Dark Theme</button>
+                    </div>
+                </div>
+                <div class="additional-features">
+                    <h3>Future Features</h3>
+                    <p>Space reserved for adding new functionality.</p>
+                </div>
+            </div>
         </div>
-
-        <!-- Error Message -->
-        <p id="error-message" class="error"></p>
-
-        <!-- Display Results -->
-        <div id="results" class="results"></div>
     </div>
 
-    <script src="script.js"></script>  <!-- Link to external JS -->
+    <script src="script.js"></script> <!-- Link to external JS -->
 </body>
 </html>
