@@ -27,11 +27,11 @@ submitButton.addEventListener('click', async () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ text })
+            body: JSON.stringify({ text }),
         });
 
         const data = await response.json();
-        
+
         // Display results
         if (data) {
             resultsDiv.innerHTML = `
@@ -50,4 +50,13 @@ submitButton.addEventListener('click', async () => {
         submitButton.disabled = false;
         submitButton.textContent = 'Analyze';
     }
+});
+
+// Handle theme changes
+document.getElementById('light-theme').addEventListener('click', () => {
+    document.body.className = 'light-theme'; // Apply the light theme
+});
+
+document.getElementById('dark-theme').addEventListener('click', () => {
+    document.body.className = 'dark-theme'; // Apply the dark theme
 });
