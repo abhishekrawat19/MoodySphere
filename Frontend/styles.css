@@ -1,0 +1,107 @@
+/* styles.css */
+body {
+    background-color: var(--background-color, #e0f7fa); /* Light blue background */
+    color: var(--text-color, #004d40); /* Dark teal text */
+    font-family: Arial, sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 1em 0;
+    background-color: #00796b; /* Teal background for header */
+    color: #ffffff;
+    border-bottom: 2px solid #004d40; /* Dark teal border */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 1em;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+main {
+    padding: 2em;
+}
+
+section {
+    background-color: #ffffff; /* White background for boxes */
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2em;
+}
+
+button {
+    display: block;
+    margin: 1em 0;
+    padding: 0.5em;
+    background-color: #004d40; /* Dark teal background for buttons */
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+footer {
+    padding: 2em 0;
+    text-align: center;
+}
+
+.theme-box {
+    background-color: #ffffff;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.theme-box button {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+}
+
+.light-theme {
+    --background-color: #e0f7fa;
+    --text-color: #004d40;
+}
+
+.dark-theme {
+    --background-color: #2c3e50; /* Dark slate grey background */
+    --text-color: #ecf0f1; /* Light grey text */
+}
+
+.dark-theme header {
+    background-color: #34495e; /* Dark blue-grey for header */
+    border-bottom-color: #2c3e50; /* Match border with body background */
+}
+
+.dark-theme section {
+    background-color: #34495e; /* Dark blue-grey for sections */
+    color: #ecf0f1; /* Light grey text for sections */
+}
+
+.dark-theme .theme-box {
+    background-color: #34495e; /* Dark blue-grey for theme box */
+}
+
+.dark-theme nav a {
+    color: #ecf0f1; /* Light grey text for nav links */
+}
