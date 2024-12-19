@@ -3,59 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sentiment Analysis</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> <!-- Google Font -->
+    <title>Moody Sphere</title>
+    <style>
+        body {
+            background-color: var(--background-color, #e0f7fa); /* Light blue background */
+            color: var(--text-color, #004d40); /* Dark teal text */
+            font-family: Arial, sans-serif;
+        }
+        header {
+            text-align: center;
+            padding: 1em 0;
+            background-color: #00796b; /* Teal background for header */
+            color: #ffffff;
+            border-bottom: 2px solid #004d40; /* Dark teal border */
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0 1em;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        main {
+            padding: 2em;
+        }
+        section {
+            background-color: #ffffff; /* White background for boxes */
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2em;
+        }
+        button {
+            display: block;
+            margin: 1em 0;
+            padding: 0.5em;
+            background-color: #004d40; /* Dark teal background for buttons */
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        footer {
+            padding: 2em 0;
+            text-align: center;
+        }
+        .theme-box {
+            background-color: #ffffff;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+        }
+        .theme-box button {
+            display: inline-block;
+            width: auto;
+            margin: 0;
+        }
+        .light-theme {
+            --background-color: #e0f7fa;
+            --text-color: #004d40;
+        }
+        .dark-theme {
+            --background-color: #2c3e50; /* Dark slate grey background */
+            --text-color: #ecf0f1; /* Light grey text */
+        }
+        .dark-theme header {
+            background-color: #34495e; /* Dark blue-grey for header */
+            border-bottom-color: #2c3e50; /* Match border with body background */
+        }
+        .dark-theme section {
+            background-color: #34495e; /* Dark blue-grey for sections */
+            color: #ecf0f1; /* Light grey text for sections */
+        }
+        .dark-theme .theme-box {
+            background-color: #34495e; /* Dark blue-grey for theme box */
+        }
+        .dark-theme nav a {
+            color: #ecf0f1; /* Light grey text for nav links */
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Header Section -->
-        <header>
-            <h1>Sentiment Analysis</h1>
-            <p class="subheading">Analyze the sentiment of text or datasets</p>
-        </header>
-
-        <div class="main-layout">
-            <!-- Left Column: Text Analysis -->
-            <div class="column">
-                <h2>Text Analysis</h2>
-                <div class="form-container">
-                    <textarea id="text-input" placeholder="Enter text to analyze"></textarea>
-                    <button id="submit-button">Analyze</button>
-                </div>
-                <p id="error-message" class="error"></p>
-                <div id="results" class="results"></div>
-            </div>
-
-            <!-- Middle Column: Upload Dataset -->
-            <div class="column">
-                <h2>Upload Dataset</h2>
-                <form id="upload-form">
-                    <input type="file" id="dataset-input" accept=".csv, .xlsx">
-                    <button type="submit">Analyze Dataset</button>
-                </form>
-                <div id="dataset-results" class="results"></div>
-            </div>
-
-            <!-- Right Column: Settings -->
-            <div class="column">
-                <h2>Interface Settings</h2>
-                <div class="theme-toggle">
-                    <h3>Theme Selector</h3>
-                    <div>
-                        <button id="light-theme" class="theme-button">Light Theme</button>
-                        <button id="dark-theme" class="theme-button">Dark Theme</button>
-                    </div>
-                </div>
-                <div class="additional-features">
-                    <h3>Future Features</h3>
-                    <p>Space reserved for adding new functionality.</p>
-                </div>
-            </div>
+<body class="light-theme">
+    <header>
+        <h1>Moody Sphere</h1>
+        <nav>
+            <ul>
+                <li><a href="audio.html">Audio Analysis</a></li>
+                <li><a href="twitter.html">Twitter Analysis</a></li>
+                <li><a href="dataset.html">Dataset Analysis</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Summary</h2>
+            <p>This project includes several modules to help you analyze different types of data:</p>
+            <ul>
+                <li><b>Audio Analysis:</b> Upload or record audio files to analyze sound patterns.</li>
+                <li><b>Twitter Analysis:</b> Search and analyze tweets based on keywords or hashtags.</li>
+                <li><b>Dataset Analysis:</b> Upload datasets in CSV or Excel format for detailed analysis.</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <div class="theme-box">
+            <button id="light-theme-button">Light Theme</button>
+            <button id="dark-theme-button">Dark Theme</button>
         </div>
-    </div>
-
-    <script src="script.js"></script> <!-- Link to external JS -->
+    </footer>
+    <script>
+        // Theme switcher
+        document.getElementById('light-theme-button').addEventListener('click', () => {
+            document.body.classList.remove('dark-theme');
+            document.body.classList.add('light-theme');
+        });
+        document.getElementById('dark-theme-button').addEventListener('click', () => {
+            document.body.classList.remove('light-theme');
+            document.body.classList.add('dark-theme');
+        });
+    </script>
 </body>
 </html>
