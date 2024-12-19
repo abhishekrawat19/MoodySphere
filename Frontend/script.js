@@ -1,62 +1,97 @@
-// Select DOM elements
-const textInput = document.getElementById('text-input');
-const submitButton = document.getElementById('submit-button');
-const errorMessage = document.getElementById('error-message');
-const resultsDiv = document.getElementById('results');
+// Theme switcher
+document.getElementById('light-theme-button').addEventListener('click', () => {
+    document.body.classList.remove('dark-theme');
+    document.body.classList.add('light-theme');
+});
 
-// Handle form submission
-submitButton.addEventListener('click', async () => {
-    const text = textInput.value.trim();
-    errorMessage.textContent = ''; // Clear previous error messages
-    resultsDiv.innerHTML = ''; // Clear previous results
+document.getElementById('dark-theme-button').addEventListener('click', () => {
+    document.body.classList.remove('light-theme');
+    document.body.classList.add('dark-theme');
+});
 
-    // Validate input
-    if (!text) {
-        errorMessage.textContent = 'Please enter some text.';
+// Dataset analysis script
+document.getElementById('analyze-dataset-button').addEventListener('click', () => {
+    const fileInput = document.getElementById('dataset-input');
+    const resultsDiv = document.getElementById('dataset-results');
+    resultsDiv.innerHTML = '';
+
+    if (fileInput.files.length === 0) {
+        resultsDiv.innerHTML = '<p>Please upload a dataset file.</p>';
         return;
     }
 
-    // Disable submit button to prevent multiple requests
-    submitButton.disabled = true;
-    submitButton.textContent = 'Analyzing...';
+    const file = fileInput.files[0];
+    const reader = new FileReader();
 
-    try {
-        // Send POST request to the backend API
-        const response = await fetch('http://127.0.0.1:8000/api/analyze/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ text }),
-        });
+    reader.onload = (event) => {
+        const content = event.target.result;
+        // Here you can add your dataset analysis logic, e.g., parsing the file and displaying results
+        resultsDiv.innerHTML = '<p>Dataset loaded successfully.</p>';
+        console.log(content); // For demonstration purposes
+    };
 
-        const data = await response.json();
-
-        // Display results
-        if (data) {
-            resultsDiv.innerHTML = `
-                <h3>Results:</h3>
-                <p>Positive: ${data.positive}</p>
-                <p>Negative: ${data.negative}</p>
-                <p>Neutral: ${data.neutral}</p>
-                <p>Compound: ${data.compound}</p>
-            `;
-        }
-    } catch (error) {
-        errorMessage.textContent = 'Failed to analyze sentiment. Please try again.';
-        console.error('Error:', error);
-    } finally {
-        // Re-enable the submit button
-        submitButton.disabled = false;
-        submitButton.textContent = 'Analyze';
+    if (file.type === "text/csv") {
+        reader.readAsText(file);
+    } else if (file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+        reader.readAsArrayBuffer(file);
+        reader.onloadend = (event) => {
+            const arrayBuffer = event.target.result;
+            /* You can integrate a library like SheetJS (xlsx) to parse Excel files */
+            resultsDiv.innerHTML = '<p>Excel file loaded successfully.</p>';
+            console.log(arrayBuffer); // For demonstration purposes
+        };
+    } else {
+        resultsDiv.innerHTML = '<p>Unsupported file type. Please upload a CSV or Excel file.</p>';
     }
 });
 
-// Handle theme changes
-document.getElementById('light-theme').addEventListener('click', () => {
-    document.body.className = 'light-theme'; // Apply the light theme
+// Twitter fetch script
+document.getElementById('fetch-tweets-button').addEventListener('click', () => {
+    const keyword = document.getElementById('twitter-keyword').value;
+    if (keyword) {
+        fetch(`https://api.example.com/search/tweets?q=${encodeURIComponent(keyword)}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('twitter-results');
+                resultsDiv.innerHTML = '';
+                data.statuses.forEach(status => {
+                    const tweetDiv = document.createElement('div');
+                    tweetDiv.classList.add('tweet');
+                    tweetDiv.innerHTML = `<p><strong>@${status.user.screen_name}</strong>: ${status.text}</p>`;
+                    resultsDiv.appendChild(tweetDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching tweets:', error));
+    }
 });
 
-document.getElementById('dark-theme').addEventListener('click', () => {
-    document.body.className = 'dark-theme'; // Apply the dark theme
+// Audio recording script
+let mediaRecorder;
+let recordedChunks = [];
+
+document.getElementById('record-audio-button').addEventListener('click', () => {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
+        mediaRecorder.stop();
+    } else {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.ondataavailable = (e) => {
+                    if (e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                };
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'audio/wav' });
+                    const audioURL = URL.createObjectURL(blob);
+                    const audioElement = document.createElement('audio');
+                    audioElement.src = audioURL;
+                    audioElement.controls = true;
+                    document.getElementById('recorded-audio').appendChild(audioElement);
+                    recordedChunks = [];
+                };
+                mediaRecorder.start();
+            })
+            .catch(error => console.error('Error accessing audio devices.', error));
+    }
 });
